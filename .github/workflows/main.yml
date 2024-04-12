@@ -34,8 +34,8 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          cdt2cmake_Linux_X64
-          tc32_toolchains
+          cdt2cmake
+          tc32
         key: ${{ runner.os }}-toolchain-tc32
         restore-keys: |
           ${{ runner.os }}-toolchain-tc32
@@ -64,19 +64,19 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          cdt2cmake_Linux_X64
-          tc32_toolchains
+          cdt2cmake
+          tc32
         key: ${{ runner.os }}-toolchain-tc32
 
     - name: convert cdt2cmake
       run: |
         echo "convert cdt2cmake"
-        ./cdt2cmake_Linux_X64/cdt2cmake/cdt2cmake ${{ github.event.inputs.cproject }}
+        ./cdt2cmake/cdt2cmake ${{ github.event.inputs.cproject }}
 
     - name: cmake build
       run: |
         echo "cmake building..."
-        cmake . -Bcmake_build -DTOOLCHAIN_PATH="`pwd`/tc32_toolchains/tc32"
+        cmake . -Bcmake_build -DTOOLCHAIN_PATH="`pwd`/tc32"
         echo "parameter_name ${{ github.event.inputs.target }}"
         cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
 

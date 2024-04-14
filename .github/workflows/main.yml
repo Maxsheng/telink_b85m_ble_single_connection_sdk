@@ -118,6 +118,7 @@ jobs:
       name: download and decompression toolchain
       env:
         SHELL: bash
+      shell: bash
       run: |
         wget -O tc32_toolchains.tar https://wiki.telink-semi.cn/tools_and_sdk/others/tc32_toolchains.tar
         tar xf tc32_toolchains.tar

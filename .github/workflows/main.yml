@@ -163,7 +163,7 @@ jobs:
       run: |
         echo "cmake building..."
         ls
-        cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH="`pwd`/tc32"
+        cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH="./tc32"
         echo "parameter_name ${{ github.event.inputs.target }}"
         cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
   

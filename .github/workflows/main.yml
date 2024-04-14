@@ -110,12 +110,12 @@ jobs:
         name: cmake-files
         path: .
 
-    - name: Move extracted files to original location
-      run: |
-        ls
-        ls cmake-files
-        mv cmake-files/**/CMakeLists.txt .
-        find . -name "CMakeLists.txt"
+    # - name: Move extracted files to original location
+    #   run: |
+    #     ls
+    #     ls cmake-files
+    #     mv cmake-files/**/CMakeLists.txt .
+    #     find . -name "CMakeLists.txt"
 
     - name: Restore Cached Toolchain
       id: Restore_Cached_Toolchain

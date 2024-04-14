@@ -165,6 +165,7 @@ jobs:
         echo "cmake building..."
         ls
         set VERBOSE=1
+        export VERBOSE=1
         $(pwd)/tc32/bin/tc32-elf-gcc --version
         cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         echo "parameter_name ${{ github.event.inputs.target }}"

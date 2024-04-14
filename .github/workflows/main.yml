@@ -28,11 +28,11 @@ jobs:
         echo "target ${{ github.event.inputs.target }}"
 
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Restore Cached Toolchain
       id: Restore_Cached_Toolchain
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           cdt2cmake
@@ -62,7 +62,7 @@ jobs:
         
     - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
       name: Cache Toolchain
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           cdt2cmake
@@ -83,11 +83,11 @@ jobs:
     #     cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
 
     - name: upload cmake artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: cmake-files
         path: |
-          path: '**/CMakeLists.txt'
+          '**/CMakeLists.txt'
         retention-days: 3
 
   

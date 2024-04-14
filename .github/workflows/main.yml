@@ -52,7 +52,7 @@ jobs:
         #   exit 1
         # fi
         
-        wget -O cdt2cmake_Linux_X64.tar.xz http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar.xz    
+        curl -O cdt2cmake_Linux_X64.tar.xz http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar.xz    
         tar xf cdt2cmake_Linux_X64.tar.xz
         ls
         if [ $? != 0 ]; then

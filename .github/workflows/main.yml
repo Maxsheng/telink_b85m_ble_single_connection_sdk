@@ -82,18 +82,19 @@ jobs:
     #     echo "parameter_name ${{ github.event.inputs.target }}"
     #     cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
 
-    # - name: upload artifacts
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: build_artifact
-    #     path: |
-    #       cmake_build/${{ github.event.inputs.target }}*
-    #     retention-days: 3
+    - name: upload cmake artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: cmake-files
+        path: |
+          path: '**/CMakeLists.txt'
+        retention-days: 3
 
   
   Windows_CMake_build:
     runs-on: windows-latest
-      
+    needs: Linux_CMake_Convert
+
     steps:
     - name: check parameters
       run: |
@@ -102,6 +103,18 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v3
+
+    - name: Download and extract CMakeLists.txt files
+      uses: actions/download-artifact@v2
+      with:
+        name: cmake-files
+        path: cmake-files
+
+    - name: Move extracted files to original location
+      run: |
+        ls cmake-files
+        mv cmake-files/**/CMakeLists.txt .
+        find . -name "CMakeLists.txt"
 
     - name: Restore Cached Toolchain
       id: Restore_Cached_Toolchain

@@ -116,6 +116,8 @@ jobs:
      
     - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
       name: download and decompression toolchain
+      env:
+        SHELL: bash
       run: |
         wget -O tc32_toolchains.tar https://wiki.telink-semi.cn/tools_and_sdk/others/tc32_toolchains.tar
         tar xf tc32_toolchains.tar
@@ -141,17 +143,7 @@ jobs:
           cdt2cmake
           # tc32
         key: ${{ runner.os }}-toolchain-tc32
-
-    - name: download and decompression toolchain
-      run: |
-        wget -O tc32_toolchains.tar https://wiki.telink-semi.cn/tools_and_sdk/others/tc32_toolchains.tar
-        tar xf tc32_toolchains.tar
-        ls
-        if [ $? != 0 ]; then
-          echo "download toolchain fail"
-          exit 1
-        fi
-        
+  
     - name: cmake build
       run: |
         echo "cmake building..."

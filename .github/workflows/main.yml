@@ -73,7 +73,7 @@ jobs:
       run: |
         echo "convert cdt2cmake"
         ./cdt2cmake/cdt2cmake ${{ github.event.inputs.cproject }}
-
+        find . -name "CMakeLists.txt"
     # - name: cmake build
     #   run: |
     #     echo "cmake building..."
@@ -87,7 +87,7 @@ jobs:
       with:
         name: cmake-files
         path: |
-          '**/CMakeLists.txt'
+          ./**/CMakeLists.txt
         retention-days: 3
 
   

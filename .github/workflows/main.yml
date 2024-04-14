@@ -160,6 +160,7 @@ jobs:
         key: ${{ runner.os }}-toolchain-tc32
   
     - name: cmake build
+      shell: bash
       run: |
         echo "cmake building..."
         ls

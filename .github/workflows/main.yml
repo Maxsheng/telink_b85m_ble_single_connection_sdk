@@ -158,18 +158,20 @@ jobs:
           # cdt2cmake
           tc32
         key: ${{ runner.os }}-toolchain-tc32
-  
-    - name: cmake build
-      shell: cmd
-      run: |
-        echo "cmake building..."
+
+          # echo "cmake building..."
         # ls
         # set VERBOSE=1
         # export VERBOSE=1
         # $(pwd)/tc32/bin/tc32-elf-gcc.exe --version
-        $(pwd)/tc32/bin/tc32-elf-gcc.exe -c test.c -o test.o
+        # $(pwd)/tc32/bin/tc32-elf-gcc.exe -c test.c -o test.o
         # $(pwd)/tc32/bin/tc32-elf-gcc -fpack-struct -fshort-enums -O2 -D__PROJECT_8258_BLE_SAMPLE__=1 -DCHIP_TYPE=CHIP_TYPE_825x -std=gnu99 -fshort-wchar -fms-extensions -finline-small-functions -ffunction-sections -fdata-sections -Wall -c b85_ble_sdk/application/app/usbaud.c -o test
         # cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         # echo "parameter_name ${{ github.event.inputs.target }}"
         # cmake --build cmake_build --target "${{ github.event.inputs.target }}"
+    - name: cmake build
+      shell: cmd
+      run: |
+        echo "cmake building..."
+        tc32\bin\tc32-elf-gcc.exe -c test.c -o test.o
   

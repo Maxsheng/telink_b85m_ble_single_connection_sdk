@@ -117,30 +117,30 @@ jobs:
     #     mv cmake-files/**/CMakeLists.txt .
     #     find . -name "CMakeLists.txt"
 
-    - name: Restore Cached Toolchain
-      id: Restore_Cached_Toolchain
-      uses: actions/cache@v4
-      with:
-        path: |
-          # cdt2cmake
-          tc32
-        key: ${{ runner.os }}-toolchain-tc32
-        restore-keys: |
-          ${{ runner.os }}-toolchain-tc32
+    # - name: Restore Cached Toolchain
+    #   id: Restore_Cached_Toolchain
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: |
+    #       # cdt2cmake
+    #       tc32
+    #     key: ${{ runner.os }}-toolchain-tc32
+    #     restore-keys: |
+    #       ${{ runner.os }}-toolchain-tc32
      
-    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
-      name: download and decompression toolchain
-      env:
-        SHELL: bash
-      shell: bash
-      run: |
-        curl -o tc32_toolchains.zip https://wiki.telink-semi.cn/tools_and_sdk/others/tc32.zip
-        unzip tc32_toolchains.zip
-        ls
-        if [ $? != 0 ]; then
-          echo "download toolchain fail"
-          exit 1
-        fi
+    # - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
+    #   name: download and decompression toolchain
+    #   env:
+    #     SHELL: bash
+    #   shell: bash
+    #   run: |
+    #     curl -o tc32_toolchains.zip https://wiki.telink-semi.cn/tools_and_sdk/others/tc32.zip
+    #     unzip tc32_toolchains.zip
+    #     ls
+    #     if [ $? != 0 ]; then
+    #       echo "download toolchain fail"
+    #       exit 1
+    #     fi
         
         # curl -o cdt2cmake_Linux_X64.tar.xz http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar.xz    
         # tar xf cdt2cmake_Linux_X64.tar.xz
@@ -150,14 +150,14 @@ jobs:
         #   exit 1
         # fi
         
-    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
-      name: Cache Toolchain
-      uses: actions/cache@v4
-      with:
-        path: |
-          # cdt2cmake
-          tc32
-        key: ${{ runner.os }}-toolchain-tc32
+    # - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
+    #   name: Cache Toolchain
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: |
+    #       # cdt2cmake
+    #       tc32
+    #     key: ${{ runner.os }}-toolchain-tc32
 
           # echo "cmake building..."
         # ls
@@ -170,8 +170,8 @@ jobs:
         # echo "parameter_name ${{ github.event.inputs.target }}"
         # cmake --build cmake_build --target "${{ github.event.inputs.target }}"
     - name: cmake build
-      shell: cmd
+      shell: bash
       run: |
         echo "cmake building..."
-        tc32\bin\tc32-elf-gcc.exe -c test.c -o test.o
+        echo $PATH
   

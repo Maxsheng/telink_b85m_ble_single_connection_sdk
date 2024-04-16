@@ -90,6 +90,53 @@ jobs:
   #         ./**/CMakeLists.txt
   #       retention-days: 3
 
+  Windows_CMake_Cache:
+    runs-on: windows-latest
+    # needs: Linux_CMake_Convert
+
+    steps:
+    - name: Restore Cached Toolchain
+      id: Restore_Cached_Toolchain
+      uses: actions/cache@v4
+      with:
+        path: |
+          # cdt2cmake
+          tc32
+        key: ${{ runner.os }}-toolchain-tc32
+        restore-keys: |
+          ${{ runner.os }}-toolchain-tc32
+     
+    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
+      name: download and decompression toolchain
+      env:
+        SHELL: bash
+      shell: bash
+      run: |
+        curl -o tc32_toolchains.zip https://wiki.telink-semi.cn/tools_and_sdk/others/tc32.zip
+        unzip tc32_toolchains.zip
+        ls
+        if [ $? != 0 ]; then
+          echo "download toolchain fail"
+          exit 1
+        fi
+        
+        # curl -o cdt2cmake_Linux_X64.tar.xz http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar.xz    
+        # tar xf cdt2cmake_Linux_X64.tar.xz
+        # ls
+        # if [ $? != 0 ]; then
+        #   echo "download cdt2cmake fail"
+        #   exit 1
+        # fi
+        
+    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
+      name: Cache Toolchain
+      uses: actions/cache@v4
+      with:
+        path: |
+          # cdt2cmake
+          tc32
+        key: ${{ runner.os }}-toolchain-tc32
+
   
   Windows_CMake_build:
     runs-on: windows-latest
@@ -175,7 +222,7 @@ jobs:
         echo "cmake building..."
         echo $PATH
         # $(pwd)/tc32/bin/tc32-elf-gcc.exe -c test.c -o test.o -v
-        $(pwd)/tc32/bin/tc32-elf-gcc -v -fpack-struct -fshort-enums -O2 -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/././ -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./vendor/common -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./common -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./drivers/8258 -D__PROJECT_8258_BLE_SAMPLE__=1 -DCHIP_TYPE=CHIP_TYPE_825x -std=gnu99 -fshort-wchar -fms-extensions -finline-small-functions -ffunction-sections -fdata-sections -Wall -MD -MT CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj -MF CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj.d -o CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj -c D:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/application/app/usbaud.c
+        $(pwd)/tc32/bin/tc32-elf-gcc -v -Wextra -fpack-struct -fshort-enums -O2 -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/././ -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./vendor/common -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./common -ID:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/./drivers/8258 -D__PROJECT_8258_BLE_SAMPLE__=1 -DCHIP_TYPE=CHIP_TYPE_825x -std=gnu99 -fshort-wchar -fms-extensions -finline-small-functions -ffunction-sections -fdata-sections -Wall -MD -MT CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj -MF CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj.d -o CMakeFiles/825x_ble_sample.dir/application/app/usbaud.c.obj -c D:/a/telink_b85m_ble_single_connection_sdk/telink_b85m_ble_single_connection_sdk/b85_ble_sdk/application/app/usbaud.c
         # cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         # echo "parameter_name ${{ github.event.inputs.target }}"
         # cmake --build cmake_build --target "${{ github.event.inputs.target }}"

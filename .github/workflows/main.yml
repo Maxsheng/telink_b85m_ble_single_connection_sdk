@@ -143,11 +143,11 @@ jobs:
 
   
   Windows_CMake_build:
-    # runs-on: windows-latest
+    runs-on: windows-latest
     defaults:
       run:
         shell: bash
-    runs-on: windows-2019
+    # runs-on: windows-2019
     # needs: Linux_CMake_Convert
 
     steps:
@@ -238,6 +238,7 @@ jobs:
         echo "add path"
         export PATH=$PATH:"$(pwd)/tc32/bin"
         echo $PATH
+        cmake --version
         cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         echo "parameter_name ${{ github.event.inputs.target }}"
         cmake --build cmake_build --target "${{ github.event.inputs.target }}"

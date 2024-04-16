@@ -236,7 +236,7 @@ jobs:
         echo "cmake building..."
         echo $PATH
         echo "add path"
-        export PATH=$PATH:"$(pwd)/tc32/bin"
+        export PATH=$PATH:"$(pwd)/tc32/bin":"/c/Windows/System32"
         echo $PATH
         cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         echo "parameter_name ${{ github.event.inputs.target }}"

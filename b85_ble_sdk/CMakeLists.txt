@@ -7,6 +7,9 @@ set(CMAKE_C_STANDARD_LIBRARIES "")    # 禁用标准 C 库的自动链接
 enable_language(ASM C)
 project(b85m_ble_single_connection_sdk)
 
+set(CMAKE_CXX_STANDARD_LIBRARIES "")  # 禁用标准 C++ 库的自动链接
+set(CMAKE_C_STANDARD_LIBRARIES "")    # 禁用标准 C 库的自动链接
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 # toolchain : tc32
 #set(TOOLCHAIN_PATH /your/path/to/toolchain/tc32)

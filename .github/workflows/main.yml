@@ -94,7 +94,10 @@ jobs:
     runs-on: windows-latest
     # runs-on: windows-2019
     # needs: Linux_CMake_Convert
-
+    defaults:
+      run:
+        shell: bash
+        
     steps:
     - name: Restore Cached Toolchain
       id: Restore_Cached_Toolchain
@@ -141,6 +144,9 @@ jobs:
   
   Windows_CMake_build:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     # runs-on: windows-2019
     # needs: Linux_CMake_Convert
 

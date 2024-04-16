@@ -238,6 +238,8 @@ jobs:
         echo "add path"
         export PATH=$PATH:"$(pwd)/tc32/bin":"/c/Windows/System32"
         echo $PATH
+        which kernel32.dll
+        ls /c/Windows/System32/kernel32.dll
         cmake -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
         echo "parameter_name ${{ github.event.inputs.target }}"
         cmake --build cmake_build --target "${{ github.event.inputs.target }}"

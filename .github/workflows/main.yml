@@ -44,7 +44,7 @@ jobs:
     - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
       name: download and decompression toolchain
       run: |
-        # curl -o tc32_toolchains.tar https://wiki.telink-semi.cn/tools_and_sdk/others/tc32_toolchains.tar
+        # curl -o tc32_toolchains.tar https://wiki.telink-semi.cn/tools_and_sdk/others/toolchains/tc32(1.3.0)_Linux_X64.tar
         # tar xf tc32_toolchains.tar
         # ls
         # if [ $? != 0 ]; then
@@ -90,65 +90,13 @@ jobs:
           ./**/CMakeLists.txt
         retention-days: 3
 
-  Windows_CMake_Cache:
-    runs-on: windows-latest
-    # runs-on: windows-2019
-    needs: Linux_CMake_Convert
-    defaults:
-      run:
-        shell: bash
-        
-    steps:
-    - name: Restore Cached Toolchain
-      id: Restore_Cached_Toolchain
-      uses: actions/cache@v4
-      with:
-        path: |
-          # cdt2cmake
-          tc32
-        key: ${{ runner.os }}-toolchain-tc32
-        restore-keys: |
-          ${{ runner.os }}-toolchain-tc32
-     
-    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
-      name: download and decompression toolchain
-      env:
-        SHELL: bash
-      shell: bash
-      run: |
-        curl -o tc32_toolchains.zip https://wiki.telink-semi.cn/tools_and_sdk/others/tc32.zip
-        unzip tc32_toolchains.zip
-        ls
-        if [ $? != 0 ]; then
-          echo "download toolchain fail"
-          exit 1
-        fi
-        
-        # curl -o cdt2cmake_Linux_X64.tar.xz http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar.xz    
-        # tar xf cdt2cmake_Linux_X64.tar.xz
-        # ls
-        # if [ $? != 0 ]; then
-        #   echo "download cdt2cmake fail"
-        #   exit 1
-        # fi
-        
-    - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
-      name: Cache Toolchain
-      uses: actions/cache@v4
-      with:
-        path: |
-          # cdt2cmake
-          tc32
-        key: ${{ runner.os }}-toolchain-tc32
-
-  
   Windows_CMake_build:
-    runs-on: windows-latest
+    # runs-on: windows-latest
+    runs-on: windows-2019
+    needs: Linux_CMake_Convert
     defaults:
       run:
         shell: bash
-    # runs-on: windows-2019
-    needs: Linux_CMake_Convert
 
     steps:
     - name: check parameters
@@ -182,13 +130,13 @@ jobs:
         SHELL: bash
       shell: bash
       run: |
-        curl -o tc32_toolchains.zip https://wiki.telink-semi.cn/tools_and_sdk/others/tc32.zip
-        unzip tc32_toolchains.zip
-        ls
+        curl -o tc32.zip https://wiki.telink-semi.cn/tools_and_sdk/others/toolchains/tc32(1.3.0)_windows_X64.zip
+        unzip tc32.zip
         if [ $? != 0 ]; then
           echo "download toolchain fail"
           exit 1
         fi
+        ls
          
     - if: ${{ steps.Restore_Cached_Toolchain.outputs.cache-hit != 'true' }}
       name: Cache Toolchain

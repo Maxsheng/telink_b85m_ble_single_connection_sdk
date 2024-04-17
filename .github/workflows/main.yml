@@ -130,7 +130,7 @@ jobs:
         SHELL: bash
       shell: bash
       run: |
-        curl -o tc32.zip https://wiki.telink-semi.cn/tools_and_sdk/others/toolchains/tc32(1.3.0)_windows_X64.zip
+        curl -o tc32.zip "https://wiki.telink-semi.cn/tools_and_sdk/others/toolchains/tc32(1.3.0)_windows_X64.zip"
         unzip tc32.zip
         if [ $? != 0 ]; then
           echo "download toolchain fail"

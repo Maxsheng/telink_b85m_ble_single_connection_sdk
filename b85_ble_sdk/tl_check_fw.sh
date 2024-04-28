@@ -1,7 +1,7 @@
 
 echo "*****************************************************"
 echo "this is post build!! current configure is :$1"
-
+set -x
 os=$(uname)
 echo "OS from uname is: ${os}"
 

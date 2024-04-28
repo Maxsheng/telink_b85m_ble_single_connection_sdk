@@ -1,7 +1,6 @@
 
 echo "*****************************************************"
 echo "this is post build!! current configure is :$1"
-set -x
 os=$(uname)
 echo "OS from uname is: ${os}"
 
@@ -9,8 +8,7 @@ echo "OS from uname is: ${os}"
 echo $1
 echo $2
 pwd
-exit 0
-tc32-elf-objcopy -v -O binary $1  $1.bin
+tc32-elf-objcopy -v -O binary $2.elf  $1.bin
 #../tl_check_fw2.exe  $1.bin
 if [ "${os}" = "Linux" ] ; then
     echo "Linux OS"

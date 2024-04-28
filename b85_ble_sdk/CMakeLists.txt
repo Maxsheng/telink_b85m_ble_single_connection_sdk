@@ -240,7 +240,9 @@ target_link_libraries(827x_module PRIVATE -llt_general_stack)
 
 
 add_custom_command(TARGET 825x_ble_remote POST_BUILD COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_ble_remote   ${PROJECT_NAME})
-add_custom_command(TARGET 825x_ble_sample POST_BUILD COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_ble_sample   ${PROJECT_NAME})
+add_custom_command(TARGET 825x_ble_sample POST_BUILD 
+    COMMAND chmod +x ${ProjDirPath}/./tl_check_fw.sh
+    COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_ble_sample   ${PROJECT_NAME})
 add_custom_command(TARGET 825x_module POST_BUILD COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_module   ${PROJECT_NAME})
 add_custom_command(TARGET 825x_feature_test POST_BUILD COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_feature_test   ${PROJECT_NAME})
 add_custom_command(TARGET 825x_master_kma_dongle POST_BUILD COMMAND ${ProjDirPath}/./tl_check_fw.sh   825x_master_kma_dongle   ${PROJECT_NAME})

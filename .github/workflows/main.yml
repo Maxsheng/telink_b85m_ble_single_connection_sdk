@@ -152,6 +152,7 @@ jobs:
       run: |
         echo "cmake building..."
         export PATH=$PATH:"$(pwd)/tc32/bin"
+        find . -type f -name "*.sh"
         find . -type f -name "*.sh" -exec chmod +x {} \;
         cmake --version
         cmake b85_ble_sdk -Bb85_ble_sdk/cmake_build -G "Unix Makefiles"  -DTOOLCHAIN_PATH=$(pwd)/tc32 -DCMAKE_C_STANDARD_LIBRARIES="" -DCMAKE_CXX_STANDARD_LIBRARIES="" -DCMAKE_C_COMPILER_FORCED=TRUE -DCMAKE_CXX_COMPILER_FORCED=TRUE 

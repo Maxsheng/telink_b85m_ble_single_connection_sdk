@@ -155,5 +155,5 @@ jobs:
         cmake --version
         cmake b85_ble_sdk -Bb85_ble_sdk/cmake_build -G "Unix Makefiles"  -DTOOLCHAIN_PATH=$(pwd)/tc32 -DCMAKE_C_STANDARD_LIBRARIES="" -DCMAKE_CXX_STANDARD_LIBRARIES="" -DCMAKE_C_COMPILER_FORCED=TRUE -DCMAKE_CXX_COMPILER_FORCED=TRUE 
         echo "parameter_name ${{ github.event.inputs.target }}"
-        cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
+        cmake --build b85_ble_sdk/cmake_build --target "${{ github.event.inputs.target }}" -j16
         

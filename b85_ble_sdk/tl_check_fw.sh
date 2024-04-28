@@ -8,6 +8,7 @@ echo "OS from uname is: ${os}"
 
 echo $1
 echo $2
+pwd
 tc32-elf-objcopy -v -O binary $2.elf  $1.bin
 #../tl_check_fw2.exe  $1.bin
 if [ "${os}" = "Linux" ] ; then

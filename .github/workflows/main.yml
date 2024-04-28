@@ -53,7 +53,7 @@ jobs:
         # fi
         
         curl -o cdt2cmake_Linux_X64.tar http://wiki.telink-semi.cn/tools_and_sdk/others/cdt2cmake_Linux_X64.tar
-        tar xf cdt2cmake_Linux_X64.tar
+        tar xf cdt2cmake_Linux_X64.tar -C cdt2cmake
         ls
         if [ $? != 0 ]; then
           echo "download cdt2cmake fail"

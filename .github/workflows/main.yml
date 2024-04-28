@@ -153,7 +153,7 @@ jobs:
         echo "cmake building..."
         export PATH=$PATH:"$(pwd)/tc32/bin"
         cmake --version
-        cmake -DCMAKE_C_STANDARD_LIBRARIES="" -DCMAKE_CXX_STANDARD_LIBRARIES="" -DCMAKE_C_COMPILER_FORCED=TRUE -DCMAKE_CXX_COMPILER_FORCED=TRUE -G "Unix Makefiles" b85_ble_sdk -Bcmake_build -DTOOLCHAIN_PATH=$(pwd)/tc32
+        cmake b85_ble_sdk -Bb85_ble_sdk/cmake_build -G "Unix Makefiles"  -DTOOLCHAIN_PATH=$(pwd)/tc32 -DCMAKE_C_STANDARD_LIBRARIES="" -DCMAKE_CXX_STANDARD_LIBRARIES="" -DCMAKE_C_COMPILER_FORCED=TRUE -DCMAKE_CXX_COMPILER_FORCED=TRUE 
         echo "parameter_name ${{ github.event.inputs.target }}"
         cmake --build cmake_build --target "${{ github.event.inputs.target }}" -j16
         

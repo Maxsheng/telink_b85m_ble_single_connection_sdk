@@ -164,5 +164,5 @@ jobs:
       with:
         name: cmake-bin-files
         path: |
-          b85_ble_sdk/cmake_build/${{ github.event.inputs.target }}.*
+          b85_ble_sdk/cmake_build/${{ github.event.inputs.target }}*
         retention-days: 1

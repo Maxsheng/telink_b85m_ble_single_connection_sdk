@@ -72,7 +72,7 @@ jobs:
     - name: convert cdt2cmake
       run: |
         echo "convert cdt2cmake"
-        ./cdt2cmake ${{ github.event.inputs.cproject }}
+        ./cdt2cmake.dist/cdt2cmake.bin ${{ github.event.inputs.cproject }}
         find . -name "CMakeLists.txt"
     # - name: cmake build
     #   run: |
